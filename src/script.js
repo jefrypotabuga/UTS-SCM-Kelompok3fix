@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const priorityInput = document.getElementById('priority-input');
     const list = document.getElementById('task-list');
     const count = document.getElementById('task-count');
+    const emptyState = document.getElementById('empty-state');
 
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
@@ -26,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         tasks.unshift(task);
         save();
-
         form.reset();
     });
 
@@ -37,6 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function render() {
         list.innerHTML = '';
+
+        // EMPTY STATE
+        if (tasks.length === 0) {
+            emptyState.style.display = 'block';
+        } else {
+            emptyState.style.display = 'none';
+        }
 
         tasks.forEach(t => {
             const li = document.createElement('li');

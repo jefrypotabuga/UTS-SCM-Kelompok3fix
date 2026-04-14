@@ -45,7 +45,7 @@ ul {
     opacity: 0.6;
 }
 
-/* PRIORITY LABEL */
+/* PRIORITY */
 .priority {
     padding: 3px 8px;
     border-radius: 5px;
@@ -63,4 +63,13 @@ ul {
 
 .priority.rendah {
     background: green;
+}
+
+/* EMPTY STATE */
+.empty-state {
+    text-align: center;
+    margin-top: 20px;
+    color: #777;
+    font-style: italic;
+    display: none;
 }
