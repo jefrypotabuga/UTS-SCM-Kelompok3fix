@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const taskForm = document.getElementById('task-form');
     const taskInput = document.getElementById('task-input');
     const assigneeInput = document.getElementById('assignee-input');
+    const dueDateInput = document.getElementById('due-date-input');
     const taskList = document.getElementById('task-list');
     const taskCount = document.getElementById('task-count');
 
@@ -17,21 +18,24 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const text = taskInput.value.trim();
         const assignee = assigneeInput.value.trim() || 'Tanpa Nama';
+        const dueDate = dueDateInput.value;
         
         if (text !== '') {
-            addTask(text, assignee);
+            addTask(text, assignee, dueDate);
             taskInput.value = '';
             assigneeInput.value = '';
+            dueDateInput.value = '';
             taskInput.focus();
         }
     });
 
     // Add new task
-    function addTask(text, assignee) {
+    function addTask(text, assignee, dueDate) {
         const newTask = {
             id: Date.now().toString(),
             text: text,
             assignee: assignee,
+            dueDate: dueDate || '-',
             completed: false,
             createdAt: new Date().toLocaleDateString('id-ID')
         };
@@ -70,13 +74,17 @@ document.addEventListener('DOMContentLoaded', () => {
         tasks.forEach(task => {
             const li = document.createElement('li');
             li.className = `task-item ${task.completed ? 'completed' : ''}`;
+            const displayDate = task.dueDate !== '-' ? task.dueDate : 'No Date';
             
             li.innerHTML = `
                 <div class="task-content">
                     <input type="checkbox" class="checkbox" ${task.completed ? 'checked' : ''} data-id="${task.id}">
                     <div class="task-details">
                         <span class="task-text">${task.text}</span>
-                        <span class="task-assignee"><i class="fas fa-user-circle"></i> ${task.assignee} • ${task.createdAt}</span>
+                        <span class="task-assignee">
+                            <i class="fas fa-user-circle"></i> ${task.assignee} • 
+                            <i class="fas fa-calendar-alt"></i> Tenggat: ${displayDate}
+                        </span>
                     </div>
                 </div>
                 <button class="delete-btn" data-id="${task.id}" title="Hapus Tugas">
