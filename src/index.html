@@ -8,34 +8,40 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1><i class="fas fa-tasks"></i> Internship Task Tracker</h1>
-            <p>Kolaborasi dan pantau progres tugas magang bersama tim</p>
-        </header>
 
-        <main>
-            <section class="task-input-section">
-                <form id="task-form">
-                    <input type="text" id="task-input" placeholder="Apa tugas baru hari ini?" required>
-                    <input type="text" id="assignee-input" placeholder="Siapa yang mengerjakan? (Opsional)">
-                    <input type="date" id="due-date-input" required>
-                    <button type="submit" id="add-btn"><i class="fas fa-plus"></i> Tambah Tugas</button>
-                </form>
-            </section>
+<div class="container">
+    <header>
+        <h1><i class="fas fa-tasks"></i> Internship Task Tracker</h1>
+        <p>Kelola tugas dengan prioritas</p>
+    </header>
 
-            <section class="task-list-section">
-                <div class="list-header">
-                    <h2>Daftar Tugas</h2>
-                    <span id="task-count">0 Tugas</span>
-                </div>
-                <ul id="task-list">
-                    <!-- Task items akan ditambahkan di sini melalui JavaScript -->
-                </ul>
-            </section>
-        </main>
-    </div>
+    <main>
+        <section class="task-input-section">
+            <form id="task-form">
+                <input type="text" id="task-input" placeholder="Apa tugas baru?" required>
+                <input type="text" id="assignee-input" placeholder="Siapa yang mengerjakan?">
+                <input type="date" id="due-date-input" required>
 
-    <script src="script.js"></script>
+                <!-- DROPDOWN PRIORITAS -->
+                <select id="priority-input" required>
+                    <option value="">Pilih Prioritas</option>
+                    <option value="Tinggi">Tinggi</option>
+                    <option value="Sedang">Sedang</option>
+                    <option value="Rendah">Rendah</option>
+                </select>
+
+                <button type="submit"><i class="fas fa-plus"></i> Tambah</button>
+            </form>
+        </section>
+
+        <section class="task-list-section">
+            <h2>Daftar Tugas</h2>
+            <span id="task-count"></span>
+            <ul id="task-list"></ul>
+        </section>
+    </main>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

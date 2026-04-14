@@ -1,116 +1,73 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const taskForm = document.getElementById('task-form');
+
+    const form = document.getElementById('task-form');
     const taskInput = document.getElementById('task-input');
     const assigneeInput = document.getElementById('assignee-input');
     const dueDateInput = document.getElementById('due-date-input');
-    const taskList = document.getElementById('task-list');
-    const taskCount = document.getElementById('task-count');
+    const priorityInput = document.getElementById('priority-input');
+    const list = document.getElementById('task-list');
+    const count = document.getElementById('task-count');
 
-    // Load tasks from local storage
-    let tasks = JSON.parse(localStorage.getItem('internshipTasks')) || [];
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
-    // Initialize
-    renderTasks();
+    render();
 
-    // Event Listener for form submit
-    taskForm.addEventListener('submit', (e) => {
+    form.addEventListener('submit', (e) => {
         e.preventDefault();
-        
-        const text = taskInput.value.trim();
-        const assignee = assigneeInput.value.trim() || 'Tanpa Nama';
-        const dueDate = dueDateInput.value;
-        
-        if (text !== '') {
-            addTask(text, assignee, dueDate);
-            taskInput.value = '';
-            assigneeInput.value = '';
-            dueDateInput.value = '';
-            taskInput.focus();
-        }
+
+        const task = {
+            id: Date.now(),
+            text: taskInput.value,
+            assignee: assigneeInput.value || "Anonim",
+            dueDate: dueDateInput.value,
+            priority: priorityInput.value,
+            completed: false
+        };
+
+        tasks.unshift(task);
+        save();
+
+        form.reset();
     });
 
-    // Add new task
-    function addTask(text, assignee, dueDate) {
-        const newTask = {
-            id: Date.now().toString(),
-            text: text,
-            assignee: assignee,
-            dueDate: dueDate || '-',
-            completed: false,
-            createdAt: new Date().toLocaleDateString('id-ID')
-        };
-        
-        tasks.unshift(newTask); // Add to the beginning of the array
-        saveAndRender();
+    function save() {
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+        render();
     }
 
-    // Toggle task completion
-    function toggleTask(id) {
-        tasks = tasks.map(task => {
-            if (task.id === id) {
-                return { ...task, completed: !task.completed };
-            }
-            return task;
-        });
-        saveAndRender();
-    }
+    function render() {
+        list.innerHTML = '';
 
-    // Delete task
-    function deleteTask(id) {
-        tasks = tasks.filter(task => task.id !== id);
-        saveAndRender();
-    }
-
-    // Save to local storage and render UI
-    function saveAndRender() {
-        localStorage.setItem('internshipTasks', JSON.stringify(tasks));
-        renderTasks();
-    }
-
-    // Render tasks to DOM
-    function renderTasks() {
-        taskList.innerHTML = '';
-        
-        tasks.forEach(task => {
+        tasks.forEach(t => {
             const li = document.createElement('li');
-            li.className = `task-item ${task.completed ? 'completed' : ''}`;
-            const displayDate = task.dueDate !== '-' ? task.dueDate : 'No Date';
-            
+            li.className = `task-item ${t.completed ? 'completed' : ''}`;
+
+            const pClass = t.priority.toLowerCase();
+
             li.innerHTML = `
-                <div class="task-content">
-                    <input type="checkbox" class="checkbox" ${task.completed ? 'checked' : ''} data-id="${task.id}">
-                    <div class="task-details">
-                        <span class="task-text">${task.text}</span>
-                        <span class="task-assignee">
-                            <i class="fas fa-user-circle"></i> ${task.assignee} • 
-                            <i class="fas fa-calendar-alt"></i> Tenggat: ${displayDate}
-                        </span>
-                    </div>
+                <div>
+                    <input type="checkbox" ${t.completed ? 'checked' : ''} onclick="toggle(${t.id})">
+                    <b>${t.text}</b><br>
+                    <small>${t.assignee} | ${t.dueDate}</small><br>
+                    <span class="priority ${pClass}">${t.priority}</span>
                 </div>
-                <button class="delete-btn" data-id="${task.id}" title="Hapus Tugas">
-                    <i class="fas fa-trash-alt"></i>
-                </button>
+                <button onclick="hapus(${t.id})">❌</button>
             `;
-            
-            taskList.appendChild(li);
+
+            list.appendChild(li);
         });
 
-        // Update task count
-        const activeTasks = tasks.filter(task => !task.completed).length;
-        taskCount.textContent = `${tasks.length} Total (${activeTasks} Sisa)`;
-
-        // Add Event Listeners to generated elements
-        document.querySelectorAll('.checkbox').forEach(checkbox => {
-            checkbox.addEventListener('change', (e) => {
-                toggleTask(e.target.dataset.id);
-            });
-        });
-
-        document.querySelectorAll('.delete-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const id = e.currentTarget.dataset.id;
-                deleteTask(id);
-            });
-        });
+        count.innerText = tasks.length + " tugas";
     }
+
+    window.toggle = function(id) {
+        tasks = tasks.map(t => t.id === id ? {...t, completed: !t.completed} : t);
+        save();
+    }
+
+    window.hapus = function(id) {
+        tasks = tasks.filter(t => t.id !== id);
+        save();
+    }
+
 });

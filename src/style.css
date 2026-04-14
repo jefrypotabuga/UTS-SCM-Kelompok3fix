@@ -1,193 +1,66 @@
-:root {
-    --primary-color: #4a6ee0;
-    --primary-hover: #3554b5;
-    --bg-color: #f4f7f6;
-    --card-bg: #ffffff;
-    --text-color: #333333;
-    --text-light: #777777;
-    --border-color: #e0e0e0;
-    --success-color: #28a745;
-    --danger-color: #dc3545;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
 body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    line-height: 1.6;
+    font-family: Arial;
+    background: #f4f4f4;
     display: flex;
     justify-content: center;
-    padding: 2rem 1rem;
-    min-height: 100vh;
+    padding: 20px;
 }
 
 .container {
-    background-color: var(--card-bg);
+    background: white;
+    width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+input, select, button {
     width: 100%;
-    max-width: 600px;
-    border-radius: 12px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
+    margin: 5px 0;
+    padding: 10px;
 }
 
-header {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 2rem;
-    text-align: center;
-}
-
-header h1 {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-}
-
-header p {
-    font-size: 0.9rem;
-    opacity: 0.9;
-}
-
-main {
-    padding: 2rem;
-}
-
-.task-input-section form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
-
-input {
-    width: 100%;
-    padding: 0.8rem 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-}
-
-input:focus {
-    outline: none;
-    border-color: var(--primary-color);
-}
-
-button#add-btn {
-    background-color: var(--primary-color);
+button {
+    background: #4a6ee0;
     color: white;
     border: none;
-    padding: 0.8rem;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-button#add-btn:hover {
-    background-color: var(--primary-hover);
-}
-
-.list-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--bg-color);
-}
-
-.list-header h2 {
-    font-size: 1.2rem;
-    color: var(--text-color);
-}
-
-#task-count {
-    background-color: var(--bg-color);
-    padding: 0.2rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    color: var(--text-light);
-    font-weight: 600;
-}
-
-#task-list {
+ul {
     list-style: none;
+    padding: 0;
 }
 
 .task-item {
+    background: #fafafa;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 8px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    margin-bottom: 0.8rem;
-    transition: all 0.3s ease;
 }
 
-.task-item:hover {
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-    transform: translateY(-2px);
-}
-
-.task-item.completed {
-    background-color: #f9f9f9;
-    border-color: #eeeeee;
-}
-
-.task-content {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex: 1;
-}
-
-.checkbox {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    accent-color: var(--primary-color);
-}
-
-.task-details {
-    display: flex;
-    flex-direction: column;
-}
-
-.task-text {
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-.task-item.completed .task-text {
+.completed {
     text-decoration: line-through;
-    color: var(--text-light);
+    opacity: 0.6;
 }
 
-.task-assignee {
-    font-size: 0.8rem;
-    color: var(--primary-color);
-    margin-top: 0.2rem;
+/* PRIORITY LABEL */
+.priority {
+    padding: 3px 8px;
+    border-radius: 5px;
+    color: white;
+    font-size: 12px;
 }
 
-.delete-btn {
-    background: none;
-    border: none;
-    color: var(--text-light);
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: color 0.3s ease;
-    padding: 0.5rem;
+.priority.tinggi {
+    background: red;
 }
 
-.delete-btn:hover {
-    color: var(--danger-color);
+.priority.sedang {
+    background: orange;
+}
+
+.priority.rendah {
+    background: green;
 }
