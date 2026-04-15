@@ -47,12 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             filteredTasks = tasks.filter(t => t.completed);
         }
 
-        // EMPTY STATE
-        if (filteredTasks.length === 0) {
-            emptyState.style.display = 'block';
-        } else {
-            emptyState.style.display = 'none';
-        }
+        emptyState.style.display = filteredTasks.length === 0 ? 'block' : 'none';
 
         filteredTasks.forEach(t => {
             const li = document.createElement('li');
@@ -89,6 +84,14 @@ document.addEventListener('DOMContentLoaded', () => {
     window.setFilter = function(filter) {
         currentFilter = filter;
         render();
+    }
+
+    // HAPUS SEMUA YANG SUDAH SELESAI
+    window.hapusSelesai = function() {
+        if (confirm("Yakin mau hapus semua tugas yang sudah selesai?")) {
+            tasks = tasks.filter(t => !t.completed);
+            save();
+        }
     }
 
 });

@@ -53,17 +53,9 @@ ul {
     font-size: 12px;
 }
 
-.priority.tinggi {
-    background: red;
-}
-
-.priority.sedang {
-    background: orange;
-}
-
-.priority.rendah {
-    background: green;
-}
+.priority.tinggi { background: red; }
+.priority.sedang { background: orange; }
+.priority.rendah { background: green; }
 
 /* FILTER */
 .filter {
@@ -83,11 +75,21 @@ ul {
     color: white;
 }
 
-/* EMPTY STATE */
+/* EMPTY */
 .empty-state {
     text-align: center;
     margin-top: 20px;
     color: #777;
     font-style: italic;
     display: none;
+}
+
+/* BUTTON HAPUS SEMUA */
+.btn-clear {
+    background: crimson;
+    margin-top: 10px;
+}
+
+.btn-clear:hover {
+    background: darkred;
 }
