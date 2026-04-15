@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const emptyState = document.getElementById('empty-state');
 
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    let currentFilter = 'all';
 
     render();
 
@@ -38,14 +39,22 @@ document.addEventListener('DOMContentLoaded', () => {
     function render() {
         list.innerHTML = '';
 
+        let filteredTasks = tasks;
+
+        if (currentFilter === 'active') {
+            filteredTasks = tasks.filter(t => !t.completed);
+        } else if (currentFilter === 'completed') {
+            filteredTasks = tasks.filter(t => t.completed);
+        }
+
         // EMPTY STATE
-        if (tasks.length === 0) {
+        if (filteredTasks.length === 0) {
             emptyState.style.display = 'block';
         } else {
             emptyState.style.display = 'none';
         }
 
-        tasks.forEach(t => {
+        filteredTasks.forEach(t => {
             const li = document.createElement('li');
             li.className = `task-item ${t.completed ? 'completed' : ''}`;
 
@@ -64,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
             list.appendChild(li);
         });
 
-        count.innerText = tasks.length + " tugas";
+        count.innerText = filteredTasks.length + " tugas";
     }
 
     window.toggle = function(id) {
@@ -75,6 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
     window.hapus = function(id) {
         tasks = tasks.filter(t => t.id !== id);
         save();
+    }
+
+    window.setFilter = function(filter) {
+        currentFilter = filter;
+        render();
     }
 
 });

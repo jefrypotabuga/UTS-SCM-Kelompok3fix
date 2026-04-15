@@ -65,6 +65,24 @@ ul {
     background: green;
 }
 
+/* FILTER */
+.filter {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.filter button {
+    flex: 1;
+    background: #ddd;
+    color: black;
+}
+
+.filter button:hover {
+    background: #4a6ee0;
+    color: white;
+}
+
 /* EMPTY STATE */
 .empty-state {
     text-align: center;
