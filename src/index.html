@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Internship Task Tracker</title>
+
+    <!-- FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -32,17 +37,14 @@
 
         <h2>Daftar Tugas</h2>
 
-        <!-- SEARCH -->
-        <input type="text" id="search-input" placeholder="🔍 Cari tugas berdasarkan nama...">
+        <input type="text" id="search-input" placeholder="🔍 Cari tugas...">
 
-        <!-- FILTER -->
         <div class="filter">
             <button class="active" onclick="setFilter('all')">Semua</button>
             <button onclick="setFilter('active')">Belum Selesai</button>
             <button onclick="setFilter('completed')">Selesai</button>
         </div>
 
-        <!-- HAPUS SEMUA -->
         <button onclick="hapusSelesai()" class="btn-clear">
             🧹 Hapus Semua yang Selesai
         </button>
@@ -51,7 +53,7 @@
         <ul id="task-list"></ul>
 
         <div id="empty-state" class="empty-state">
-            😴 Belum ada tugas, silahkan bersantai!
+            😴 Belum ada tugas, santai dulu~
         </div>
     </main>
 </div>

@@ -25,10 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
 
         const taskText = taskInput.value.trim();
-        if (taskText === '') {
-            alert('Tugas tidak boleh hanya berisi spasi kosong!');
-            return;
-        }
+        if (!taskText) return alert("Tugas kosong!");
 
         const task = {
             id: Date.now(),
@@ -52,40 +49,34 @@ document.addEventListener('DOMContentLoaded', () => {
     function render() {
         list.innerHTML = '';
 
-        let filteredTasks = tasks;
+        let filtered = tasks;
 
-        if (currentFilter === 'active') {
-            filteredTasks = tasks.filter(t => !t.completed);
-        } else if (currentFilter === 'completed') {
-            filteredTasks = tasks.filter(t => t.completed);
-        }
+        if (currentFilter === 'active') filtered = tasks.filter(t => !t.completed);
+        if (currentFilter === 'completed') filtered = tasks.filter(t => t.completed);
 
         if (searchQuery) {
-            filteredTasks = filteredTasks.filter(t => t.text.toLowerCase().includes(searchQuery));
+            filtered = filtered.filter(t => t.text.toLowerCase().includes(searchQuery));
         }
 
-        emptyState.style.display = filteredTasks.length === 0 ? 'block' : 'none';
+        emptyState.style.display = filtered.length ? 'none' : 'block';
+        count.innerText = filtered.length + " tugas";
 
-        filteredTasks.forEach(t => {
+        filtered.forEach(t => {
             const li = document.createElement('li');
             li.className = `task-item ${t.completed ? 'completed' : ''}`;
-
-            const pClass = t.priority.toLowerCase();
 
             li.innerHTML = `
                 <div>
                     <input type="checkbox" ${t.completed ? 'checked' : ''} onclick="toggle(${t.id})">
                     <b>${t.text}</b><br>
                     <small>${t.assignee} | ${t.dueDate}</small><br>
-                    <span class="priority ${pClass}">${t.priority}</span>
+                    <span class="priority ${t.priority.toLowerCase()}">${t.priority}</span>
                 </div>
                 <button onclick="hapus(${t.id})">❌</button>
             `;
 
             list.appendChild(li);
         });
-
-        count.innerText = filteredTasks.length + " tugas";
     }
 
     window.toggle = function(id) {
@@ -100,19 +91,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.setFilter = function(filter) {
         currentFilter = filter;
-        
-        // Update visual tombol aktif
+
         document.querySelectorAll('.filter button').forEach(btn => {
             btn.classList.remove('active');
         });
-        document.querySelector(`.filter button[onclick="setFilter('${filter}')"]`).classList.add('active');
 
+        event.target.classList.add('active');
         render();
     }
 
-    // HAPUS SEMUA YANG SUDAH SELESAI
     window.hapusSelesai = function() {
-        if (confirm("Yakin mau hapus semua tugas yang sudah selesai?")) {
+        if (confirm("Yakin hapus semua yang selesai?")) {
             tasks = tasks.filter(t => !t.completed);
             save();
         }
