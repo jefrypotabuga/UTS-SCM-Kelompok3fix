@@ -75,6 +75,13 @@ ul {
     color: white;
 }
 
+/* KELAS ACTIVE UNTUK BUTTON FILTER */
+.filter button.active {
+    background: #4a6ee0;
+    color: white;
+    font-weight: bold;
+}
+
 /* EMPTY */
 .empty-state {
     text-align: center;

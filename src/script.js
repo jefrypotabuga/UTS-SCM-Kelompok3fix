@@ -24,9 +24,15 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
+        const taskText = taskInput.value.trim();
+        if (taskText === '') {
+            alert('Tugas tidak boleh hanya berisi spasi kosong!');
+            return;
+        }
+
         const task = {
             id: Date.now(),
-            text: taskInput.value,
+            text: taskText,
             assignee: assigneeInput.value || "Anonim",
             dueDate: dueDateInput.value,
             priority: priorityInput.value,
@@ -94,6 +100,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.setFilter = function(filter) {
         currentFilter = filter;
+        
+        // Update visual tombol aktif
+        document.querySelectorAll('.filter button').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.querySelector(`.filter button[onclick="setFilter('${filter}')"]`).classList.add('active');
+
         render();
     }
 
