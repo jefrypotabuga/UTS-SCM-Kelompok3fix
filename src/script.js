@@ -5,14 +5,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const assigneeInput = document.getElementById('assignee-input');
     const dueDateInput = document.getElementById('due-date-input');
     const priorityInput = document.getElementById('priority-input');
+    const searchInput = document.getElementById('search-input');
     const list = document.getElementById('task-list');
     const count = document.getElementById('task-count');
     const emptyState = document.getElementById('empty-state');
 
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     let currentFilter = 'all';
+    let searchQuery = '';
 
     render();
+
+    searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.toLowerCase();
+        render();
+    });
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -45,6 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
             filteredTasks = tasks.filter(t => !t.completed);
         } else if (currentFilter === 'completed') {
             filteredTasks = tasks.filter(t => t.completed);
+        }
+
+        if (searchQuery) {
+            filteredTasks = filteredTasks.filter(t => t.text.toLowerCase().includes(searchQuery));
         }
 
         emptyState.style.display = filteredTasks.length === 0 ? 'block' : 'none';
