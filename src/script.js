@@ -66,7 +66,12 @@ function render(){
       <button onclick="hapus(${t.id})">❌</button>
     `;
 
-    list.appendChild(li);
+    li.classList.add('enter');
+      list.appendChild(li);
+
+setTimeout(() => {
+    li.classList.add('show');
+}, 10);
   });
 }
 
