@@ -1,61 +1,55 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Internship Task Tracker</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Internship Task Tracker</title>
 
-    <!-- FONT -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="container">
-    <header>
-        <h1>📋 Internship Task Tracker</h1>
-        <p>Kelola tugas dengan prioritas</p>
-    </header>
+  <header>
+    <h1>📋 Internship Task Tracker</h1>
+    <p>Kelola tugas dengan lebih modern ✨</p>
+  </header>
 
-    <main>
-        <form id="task-form">
-            <input type="text" id="task-input" placeholder="Apa tugas baru?" required>
-            <input type="text" id="assignee-input" placeholder="Siapa yang mengerjakan?">
-            <input type="date" id="due-date-input" required>
+  <form id="task-form">
+    <input type="text" id="task-input" placeholder="Apa tugas baru?" required>
+    <input type="text" id="assignee-input" placeholder="Siapa yang mengerjakan?">
+    <input type="date" id="due-date-input" required>
 
-            <select id="priority-input" required>
-                <option value="">Pilih Prioritas</option>
-                <option value="Tinggi">Tinggi</option>
-                <option value="Sedang">Sedang</option>
-                <option value="Rendah">Rendah</option>
-            </select>
+    <select id="priority-input" required>
+      <option value="">Pilih Prioritas</option>
+      <option value="Tinggi">Tinggi</option>
+      <option value="Sedang">Sedang</option>
+      <option value="Rendah">Rendah</option>
+    </select>
 
-            <button type="submit">Tambah</button>
-        </form>
+    <button type="submit">Tambah Tugas</button>
+  </form>
 
-        <h2>Daftar Tugas</h2>
+  <h3>Daftar Tugas</h3>
 
-        <input type="text" id="search-input" placeholder="🔍 Cari tugas...">
+  <input type="text" id="search-input" placeholder="🔍 Cari tugas...">
 
-        <div class="filter">
-            <button class="active" onclick="setFilter('all')">Semua</button>
-            <button onclick="setFilter('active')">Belum Selesai</button>
-            <button onclick="setFilter('completed')">Selesai</button>
-        </div>
+  <div class="filter">
+    <button class="active" onclick="setFilter('all', event)">Semua</button>
+    <button onclick="setFilter('active', event)">Belum Selesai</button>
+    <button onclick="setFilter('completed', event)">Selesai</button>
+  </div>
 
-        <button onclick="hapusSelesai()" class="btn-clear">
-            🧹 Hapus Semua yang Selesai
-        </button>
+  <button onclick="hapusSelesai()" class="btn-clear">🧹 Hapus Selesai</button>
 
-        <span id="task-count"></span>
-        <ul id="task-list"></ul>
+  <span id="task-count"></span>
+  <ul id="task-list"></ul>
 
-        <div id="empty-state" class="empty-state">
-            😴 Belum ada tugas, santai dulu~
-        </div>
-    </main>
+  <div id="empty-state" class="empty-state">
+    😴 Belum ada tugas
+  </div>
 </div>
 
 <script src="script.js"></script>

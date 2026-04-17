@@ -1,102 +1,116 @@
-body {
-    font-family: Arial;
-    background: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    padding: 20px;
+*{
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
 }
 
-.container {
-    background: white;
-    width: 400px;
-    padding: 20px;
-    border-radius: 10px;
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  padding:30px;
+  background: linear-gradient(135deg,#4a6ee0,#8a5cf6);
 }
 
-input, select, button {
-    width: 100%;
-    margin: 5px 0;
-    padding: 10px;
+.container{
+  width:100%;
+  max-width:520px;
+  background:#fff;
+  padding:20px;
+  border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
 }
 
-button {
-    background: #4a6ee0;
-    color: white;
-    border: none;
-    cursor: pointer;
+header h1{
+  margin:0;
+  font-size:22px;
 }
 
-ul {
-    list-style: none;
-    padding: 0;
+header p{
+  margin:5px 0 15px;
+  color:#666;
 }
 
-.task-item {
-    background: #fafafa;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
+input,select,button{
+  width:100%;
+  padding:10px;
+  margin:6px 0;
+  border-radius:10px;
+  border:1px solid #ddd;
 }
 
-.completed {
-    text-decoration: line-through;
-    opacity: 0.6;
+button{
+  background:#4a6ee0;
+  color:#fff;
+  border:none;
+  cursor:pointer;
+  font-weight:600;
+  transition:0.2s;
 }
 
-/* PRIORITY */
-.priority {
-    padding: 3px 8px;
-    border-radius: 5px;
-    color: white;
-    font-size: 12px;
+button:hover{
+  opacity:0.9;
+  transform:translateY(-1px);
 }
 
-.priority.tinggi { background: red; }
-.priority.sedang { background: orange; }
-.priority.rendah { background: green; }
-
-/* FILTER */
-.filter {
-    display: flex;
-    gap: 5px;
-    margin-bottom: 10px;
+.btn-clear{
+  background:crimson;
 }
 
-.filter button {
-    flex: 1;
-    background: #ddd;
-    color: black;
+.filter{
+  display:flex;
+  gap:6px;
+  margin:10px 0;
 }
 
-.filter button:hover {
-    background: #4a6ee0;
-    color: white;
+.filter button{
+  flex:1;
+  background:#eee;
+  color:#333;
 }
 
-/* KELAS ACTIVE UNTUK BUTTON FILTER */
-.filter button.active {
-    background: #4a6ee0;
-    color: white;
-    font-weight: bold;
+.filter button.active{
+  background:#4a6ee0;
+  color:#fff;
 }
 
-/* EMPTY */
-.empty-state {
-    text-align: center;
-    margin-top: 20px;
-    color: #777;
-    font-style: italic;
-    display: none;
+ul{
+  list-style:none;
+  padding:0;
 }
 
-/* BUTTON HAPUS SEMUA */
-.btn-clear {
-    background: crimson;
-    margin-top: 10px;
+.task-item{
+  display:flex;
+  justify-content:space-between;
+  background:#f9f9f9;
+  padding:10px;
+  margin:10px 0;
+  border-radius:12px;
 }
 
-.btn-clear:hover {
-    background: darkred;
+.completed{
+  text-decoration:line-through;
+  opacity:0.6;
+}
+
+.priority{
+  font-size:12px;
+  padding:3px 8px;
+  border-radius:6px;
+  color:#fff;
+}
+
+.priority.tinggi{background:#ff4d4d;}
+.priority.sedang{background:#ff9f1c;}
+.priority.rendah{background:#2ecc71;}
+
+.empty-state{
+  text-align:center;
+  color:#777;
+  display:none;
+  margin-top:15px;
+}
+
+#task-count{
+  font-weight:600;
 }
