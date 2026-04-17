@@ -79,13 +79,20 @@ ul{
   padding:0;
 }
 
-.task-item{
-  display:flex;
-  justify-content:space-between;
-  background:#f9f9f9;
-  padding:10px;
-  margin:10px 0;
-  border-radius:12px;
+.task-item {
+  transition: all 0.3s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.task-item.enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.task-item.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .completed{
